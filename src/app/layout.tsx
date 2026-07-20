@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   keywords: ["portfolio", "web developer", "ui/ux designer", "muhammad wahyu anggoro", "wahyu", "awang", "mwa_awang"],
 };
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export default function RootLayout({
   children,
 }: {
@@ -15,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" data-scroll-behavior="smooth">
-      <body>{children}</body>
+      <body>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
