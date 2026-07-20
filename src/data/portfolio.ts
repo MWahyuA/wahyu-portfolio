@@ -64,7 +64,7 @@ export const profile: Profile = {
   heroSubtitle:
     "Building beautiful, functional, and impactful digital experiences.",
   photo: "/images/profile.webp",
-  bio: "Computer Engineering graduate from Politeknik Negeri Semarang <strong>(GPA 3.76/4.00)</strong> with <strong>1 year</strong> of work experience in UI/UX Design and Web Development. Passionate about building intuitive, user-centered digital solutions.",
+  bio: "Computer Engineering Technology graduate from Politeknik Negeri Semarang <strong>(GPA 3.76/4.00)</strong> with <strong>1 year</strong> of work experience in UI/UX Design and Web Development. Passionate about building intuitive, user-centered digital solutions.",
   skills: [
     {
       category: "UI/UX Designer",
