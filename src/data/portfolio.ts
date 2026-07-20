@@ -98,7 +98,7 @@ export const profile: Profile = {
     behance: "https://www.behance.net/MWahyuA",
     email: "mwahyua24@gmail.com",
   },
-  cvUrl: "/CV_MuhammadWahyuAnggoro-English.pdf",
+  cvUrl: "/CV_Muhammad-Wahyu-Anggoro_English.pdf",
 };
 
 // ---------- Experiences ----------
