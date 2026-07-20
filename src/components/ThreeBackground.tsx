@@ -19,7 +19,7 @@ export default function ThreeBackground() {
 
         const camera = new THREE.PerspectiveCamera(
             75,
-            window.innerWidth / window.innerHeight,
+            mount.clientWidth / mount.clientHeight,
             0.1,
             1000
         );
@@ -28,7 +28,7 @@ export default function ThreeBackground() {
         camera.position.y = 0;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(mount.clientWidth, mount.clientHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         mount.appendChild(renderer.domElement);
 
@@ -89,9 +89,10 @@ export default function ThreeBackground() {
 
         // 4. Handle Resize
         const handleResize = () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            if (!mount) return;
+            camera.aspect = mount.clientWidth / mount.clientHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(mount.clientWidth, mount.clientHeight);
         };
         window.addEventListener("resize", handleResize);
 
