@@ -14,85 +14,76 @@ export default function ThreeBackground() {
         // Set background to a very dark purple/black to match the aesthetic
         scene.background = new THREE.Color(0x09040f);
 
+        const getDimensions = () => {
+            if (!mount) return { width: window.innerWidth, height: window.innerHeight };
+            return {
+                width: mount.offsetWidth || window.innerWidth,
+                height: mount.offsetHeight || window.innerHeight
+            };
+        };
+
         // FOG: This is crucial. Fog makes the grid fade out smoothly into the center/horizon.
         scene.fog = new THREE.FogExp2(0x09040f, 0.04);
 
-        const camera = new THREE.PerspectiveCamera(
-            75,
-            mount.clientWidth / mount.clientHeight,
-            0.1,
-            1000
-        );
+        const { width, height } = getDimensions();
+
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
         camera.position.z = 20;
-        // Raise camera slightly to look down the infinite tunnel
         camera.position.y = 0;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-        renderer.setSize(mount.clientWidth, mount.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+        // Batasi pixel ratio max 2 agar GPU HP tidak jebol (crashes WebGL context)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         mount.appendChild(renderer.domElement);
 
         // 2. Create GridHelper (Floor and Ceiling)
         const gridSize = 200;
-        const gridDivisions = 60; // How dense the grid is
-        // Primary Blue Color
+        const gridDivisions = 60;
         const gridColor = new THREE.Color(0x2b2bf4);
+        gridColor.multiplyScalar(0.3);
 
-        // Fade lines a bit so it's not too harsh, making it "lebih redup"
-        gridColor.multiplyScalar(0.3); // Sangat redup
-
-        // Buat material grid menjadi transparan (opsional tapi membantu)
         const gridMaterial = new THREE.LineBasicMaterial({
             color: gridColor,
             transparent: true,
-            opacity: 0.2, // Mengurangi opasitas agar jauh lebih redup
+            opacity: 0.2,
         });
 
-        // -- FLOOR GRID --
         const gridBottom = new THREE.GridHelper(gridSize, gridDivisions, gridColor, gridColor);
-        gridBottom.position.y = -6; // push it down
+        gridBottom.position.y = -6;
         (gridBottom.material as THREE.Material).transparent = true;
-        (gridBottom.material as THREE.Material).opacity = 0.80; // Set to very dim
+        (gridBottom.material as THREE.Material).opacity = 0.80;
         scene.add(gridBottom);
 
-        // -- CEILING GRID --
         const gridTop = new THREE.GridHelper(gridSize, gridDivisions, gridColor, gridColor);
-        gridTop.position.y = 6; // push it up
+        gridTop.position.y = 6;
         (gridTop.material as THREE.Material).transparent = true;
-        (gridTop.material as THREE.Material).opacity = 0.80; // Set to very dim
+        (gridTop.material as THREE.Material).opacity = 0.80;
         scene.add(gridTop);
 
-        // Space between lines (needed for seamless endless animation)
         const spaceBetweenLines = gridSize / gridDivisions;
-
         let animationFrameId: number;
-        // 3. Animation Loop
-        let speed = 0.05; // Animation speed for movement
+        let speed = 0.05;
 
         const animate = () => {
             animationFrameId = requestAnimationFrame(animate);
-
-            // Move both grids towards the camera to create infinite moving effect
             gridBottom.position.z += speed;
             gridTop.position.z += speed;
 
-            // Reset grid position once it shifts by 1 exact grid-cell
-            // This creates a perfectly seamless infinite loop
             if (gridBottom.position.z > spaceBetweenLines) {
                 gridBottom.position.z = 0;
                 gridTop.position.z = 0;
             }
-
             renderer.render(scene, camera);
         };
         animate();
 
-        // 4. Handle Resize
+        // 4. Handle Resize safely
         const handleResize = () => {
-            if (!mount) return;
-            camera.aspect = mount.clientWidth / mount.clientHeight;
+            const { width, height } = getDimensions();
+            camera.aspect = width / height;
             camera.updateProjectionMatrix();
-            renderer.setSize(mount.clientWidth, mount.clientHeight);
+            renderer.setSize(width, height);
         };
         window.addEventListener("resize", handleResize);
 
@@ -100,20 +91,20 @@ export default function ThreeBackground() {
         return () => {
             window.removeEventListener("resize", handleResize);
             cancelAnimationFrame(animationFrameId);
-            if (mount.contains(renderer.domElement)) {
+            if (mount && mount.contains(renderer.domElement)) {
                 mount.removeChild(renderer.domElement);
             }
             gridTop.dispose();
             gridBottom.dispose();
             renderer.dispose();
-            renderer.forceContextLoss(); // Force memory clear to avoid WebGL limits
+            renderer.forceContextLoss();
         };
     }, []);
 
     return (
         <div
             ref={mountRef}
-            className="absolute inset-0 z-0 pointer-events-none"
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
             style={{
                 position: 'absolute',
                 top: 0,
