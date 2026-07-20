@@ -1479,6 +1479,22 @@ a.timeline-item:hover {
     display: flex;
   }
 
+  /* Penyesuaian Floating Badge untuk Tablet / HP agak besar */
+  .hero-floating-badge {
+    font-size: 0.85rem;
+    padding: 10px 16px;
+  }
+
+  .badge-tl {
+    top: -5px;
+    left: -40px;
+  }
+
+  .badge-br {
+    bottom: -5px;
+    right: -40px;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
@@ -1505,6 +1521,28 @@ a.timeline-item:hover {
   .hero-photo-wrapper {
     width: 180px;
     height: 180px;
+  }
+
+  /* Mengatur ulang Floating Badge (Lebih Kecil) */
+  .hero-floating-badge {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+
+  .hero-floating-badge .icon {
+    font-size: 0.9rem;
+  }
+
+  /* UI/UX Designer lebih ke atas */
+  .badge-tl {
+    top: -15px;
+    left: -30px;
+  }
+
+  /* Web Developer lebih ke bawah */
+  .badge-br {
+    bottom: -20px;
+    right: -25px;
   }
 
   .hero-name {
