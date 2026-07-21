@@ -36,7 +36,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
             <section className="project-detail">
                 <div className="container">
-                    <Link href="/#projects" className="back-link">
+                    <Link href="/" className="back-link">
                         ← Back to Projects
                     </Link>
 
@@ -52,10 +52,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                             {project.category.map((cat) => (
                                 <Link
                                     key={cat}
-                                    href={`/#projects`}
+                                    href={`/`}
                                     className={`project-card-category cat-${cat.replace('/', '')}`}
                                     style={{ fontSize: "0.85rem", padding: "8px 24px", position: "relative", top: "auto", left: "auto", textDecoration: "none" }}
-                                    title={`Kembali ke daftar project ${cat}`}
+                                    title={`Kembali ke beranda`}
                                 >
                                     {cat}
                                 </Link>
