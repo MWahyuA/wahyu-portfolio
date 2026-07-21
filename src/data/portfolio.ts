@@ -136,7 +136,7 @@ export const experiences: Experience[] = [
     workType: "Internship (MSIB Batch 7)",
     period: "Sep 2024 – Dec 2025",
     points: [
-      "Became a project leader who led 5 members (2 UI/UX Designers & 3 Software Developers) in a project to create a consultation website called 'PersonalityTalk' and completed the project in 4 months",
+      "Became a project leader who led 5 members (2 UI/UX Designers & 3 Software Developers) in a project to create a consultation website called 'PersonalityTalk' and completed the project in 4 months.",
       "Redesigned the PersonalityTalk website from a static platform into an interactive and user-friendly experience.",
       "Integrated new features including Consultation, Courses, Mental Health Information, Mental Tests, and Articles.",
       "Executed the end-to-end design process, from competitor analysis and system architecture to desktop and mobile UI design.",
