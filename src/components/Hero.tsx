@@ -22,7 +22,18 @@ export default function Hero() {
                     </p>
                     <p className="hero-desc">{profile.heroSubtitle}</p>
                     <div className="hero-buttons">
-                        <a href="#projects" className="btn btn-primary">
+                        <a
+                            href="#projects"
+                            className="btn btn-primary"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                const section = document.getElementById("projects");
+                                if (section) {
+                                    const y = section.getBoundingClientRect().top + window.scrollY - 80;
+                                    window.scrollTo({ top: y, behavior: "smooth" });
+                                }
+                            }}
+                        >
                             View Projects
                         </a>
                         <a
