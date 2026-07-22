@@ -122,6 +122,7 @@ export const experiences: Experience[] = [
     workType: "Fulltime",
     period: "Oct 2025 – Mar 2026",
     points: [
+      "Collaborating directly as part of a single team with the P3K KOMDIGI Jawa Tengah staff on various website and app development projects",
       "Designed a digital market dashboard and traditional market stock monitoring system named Pasarku (Responsive Website) in less than 2 months, streamlining the stock monitoring process.",
       "Developed a seamless mobile application design for Pasarku couriers, accelerating the delivery management workflow.",
       "Created a responsive website design for Omah Lestari, successfully bridging borrowers, developers, vendors, the Central Java Provincial Government, and bank employees into a unified 3-month project delivery.",
